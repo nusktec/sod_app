@@ -51,7 +51,6 @@ const WelcomeScreen: () => React$Node = (props) => {
                     setTimeout(() => {
                         props.navigation.navigate("home_screen");
                     }, 1000);
-                    return;
                 })
             }else{
                 Toast.show({
@@ -61,6 +60,7 @@ const WelcomeScreen: () => React$Node = (props) => {
                     type: 'error'
                 });
             }
+            return;
         }).catch(err=>{
             console.log(err);
             Toast.show({

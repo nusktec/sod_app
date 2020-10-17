@@ -4,6 +4,7 @@
  * Developer Revelation A.F *
  */
 //api stuffs
+const STR_KEY = "sod_rdx";
 const BASE_URL = "http://192.168.8.102/sod/api";
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -14,7 +15,7 @@ export async function isLogin() {
         if (value !== null) {
             // value previously stored
             return value;
-        }else{
+        } else {
             return false;
         }
     } catch (e) {
@@ -37,8 +38,8 @@ export function remakeHeader() {
     return {
         headers: {
             'ssk': 'f94fd990390d8a05629708a22b133ccf9756ad4f',
-            'Accept': 'application/json',
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json',
             'mode': 'cors',
             'redirect': 'follow',
         }, method: 'POST',
@@ -52,6 +53,5 @@ export async function doLogin(data) {
     headersParse = remakeHeader();
     headersParse.body = JSON.stringify(data);
     let res = await fetch(BASE_URL + "?cmd=add-user", headersParse);
-    console.log(res);
     return await res.json();
 }
