@@ -5,7 +5,8 @@
  */
 //api stuffs
 const STR_KEY = "sod_rdx";
-const BASE_URL = "http://192.168.8.102/sod/api";
+const BASE_URL = "http://192.168.8.101/sod/api";
+export const ASSETS_URL = "http://192.168.8.101/sod/";
 import AsyncStorage from '@react-native-community/async-storage';
 
 //fetch login details
@@ -14,7 +15,7 @@ export async function isLogin() {
         const value = await AsyncStorage.getItem(STR_KEY);
         if (value !== null) {
             // value previously stored
-            return value;
+            return JSON.parse(value);
         } else {
             return false;
         }
@@ -53,5 +54,12 @@ export async function doLogin(data) {
     headersParse = remakeHeader();
     headersParse.body = JSON.stringify(data);
     let res = await fetch(BASE_URL + "?cmd=add-user", headersParse);
+    return await res.json();
+}
+
+//get list functions
+export async function getList() {
+    headersParse = remakeHeader();
+    let res = await fetch(BASE_URL + "?cmd=all", headersParse);
     return await res.json();
 }

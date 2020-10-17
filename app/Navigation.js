@@ -12,6 +12,7 @@ const Stack = createStackNavigator();
 //import screen
 import SplashScreen from './SplashScreen';
 import WelcomeScreen from './WelcomeScreen';
+import BookReaderScreen from './pages/BookReader';
 import HomeScreen from './pages/Home';
 //main container
 export default () => {
@@ -21,6 +22,7 @@ export default () => {
                 <Stack.Navigator initialRouteName="splash_screen">
                     <Stack.Screen component={SplashScreen} name="splash_screen" options={{headerShown: false}}/>
                     <Stack.Screen component={WelcomeScreen} name="welcome_screen" options={{headerShown: false}}/>
+                    <Stack.Screen component={BookReaderScreen} name="book_screen" options={{headerShown: false}}/>
                     <Stack.Screen component={HomeScreen} name="home_screen" options={{headerShown: false}}/>
                 </Stack.Navigator>
             </NavigationContainer>

@@ -36,23 +36,22 @@ const WelcomeScreen: () => React$Node = (props) => {
             mgender: xgender
         };
         doLogin(data).then(res => {
-            console.log(res);
             //push to temp
-            if(res.status){
-                setIsLogin(res.data).then(res=>{
+            if (res.status) {
+                setIsLogin(res.data).then(resp => {
                     //do login
                     Toast.show({
                         topOffset: 50,
-                        text1: 'Logged In',
+                        text1: 'Logged In (' + resp.data.mname + ')',
                         text2: 'Successfully logged, enjoy your readings...',
                         type: 'success'
                     });
                     //open home now
                     setTimeout(() => {
                         props.navigation.navigate("home_screen");
-                    }, 1000);
+                    }, 2000);
                 })
-            }else{
+            } else {
                 Toast.show({
                     topOffset: 50,
                     text1: 'Logging Failed !',
@@ -60,9 +59,9 @@ const WelcomeScreen: () => React$Node = (props) => {
                     type: 'error'
                 });
             }
-            return;
-        }).catch(err=>{
-            console.log(err);
+            setModal(false);
+            setLoading(true);
+        }).catch(err => {
             Toast.show({
                 topOffset: 50,
                 text1: 'Logging Failed !',
@@ -78,10 +77,10 @@ const WelcomeScreen: () => React$Node = (props) => {
         <>
         <StatusBar barStyle={xtbar} backgroundColor={'transparent'} translucent/>
         <SafeAreaView style={{flex: 1, backgroundColor: themeColor().lightTheme.bgWhite}}>
-            <ImageBackground source={imagesStore().bg2}
+            <ImageBackground source={imagesStore().bg11}
                              style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                <Text bold h3 style={{color: themeColor().lightTheme.bgWhite}}>SEEDS OF DESTINY</Text>
-                <Text h6 bold style={{color: themeColor().lightTheme.ERROR2}}>Mobile Version</Text>
+                <Text bold h2 style={{color: themeColor().lightTheme.bgWhite}}>SEEDS OF DESTINY</Text>
+                <Text h6 bold style={{color: themeColor().lightTheme.bgWhite}}>Newly Installed ?</Text>
             </ImageBackground>
             <View style={{
                 flex: 1,
