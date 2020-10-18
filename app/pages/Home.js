@@ -100,7 +100,7 @@ const Home: () => React$Node = (props) => {
                     <>
                     <View style={{flex: 1}}>
                         <View style={{flex: 1}}>
-                            {menu === 1 ? <Calendar {...props} d={xtoday} u={profile}/> : null}
+                            {menu === 1 ? <Calendar {...props} dx={xdata} d={xtoday} u={profile}/> : null}
                             {menu === 2 ? <List {...props} d={xdata} u={profile}/> : null}
                             {menu === 3 ? <Notifications {...props} u={profile}/> : null}
                             {menu === 4 ? <Profile {...props} u={profile}/> : null}

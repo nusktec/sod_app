@@ -6,7 +6,7 @@
 import React from "react";
 import {View, TouchableOpacity, StatusBar, ImageBackground, Linking, ScrollView} from "react-native";
 import {Icon, Text, Button as Buttonx} from "galio-framework";
-import {ASSETS_URL} from "./../Functions";
+import {ASSETS_URL, addViews} from "./../Functions";
 import {themeColor} from "../Themes";
 import {Badge, Button, Card} from "react-native-elements";
 import HTML from 'react-native-render-html';
@@ -22,6 +22,8 @@ class BookReader extends React.Component {
         setTimeout(() => {
             this.setState(this.props.route.params.d)
         }, 5);
+        //add views
+        addViews({mid: this.props.route.params.u.mid, cid: this.state.cid}).then(null).done();
     }
 
     render() {
@@ -100,8 +102,8 @@ class BookReader extends React.Component {
                         </View>
                     </ImageBackground>
                     <Card containerStyle={{
-                        borderTopLeftRadius: 5,
-                        borderTopEndRadius: 5,
+                        borderTopLeftRadius: 10,
+                        borderTopEndRadius: 10,
                         marginTop: -15,
                         margin: 0,
                         borderWidth: 0

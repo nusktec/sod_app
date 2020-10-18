@@ -4,12 +4,43 @@
  * Developer Revelation A.F *
  */
 import React from "react";
-import {View, ImageBackground} from "react-native";
+import {View, ImageBackground, TouchableOpacity, FlatList} from "react-native";
 import {Text} from "galio-framework";
 import {bgCardShuffle} from "./../Themes";
 import {Button, Icon} from "react-native-elements";
+
 //export main app
 class Calendar extends React.Component {
+
+    listSODx = () => {
+        return (
+            <>
+            <TouchableOpacity activeOpacity={0.8} style={{marginHorizontal: 5}}>
+                <ImageBackground source={bgCardShuffle()}
+                                 style={{width: 120, height: 150, borderRadius: 10, overflow: 'hidden'}}>
+                    <View style={{flex: 1, backgroundColor: 'rgba(0,0,0,0,5)'}}>
+
+                    </View>
+                </ImageBackground>
+            </TouchableOpacity>
+            </>
+        )
+    };
+
+    listSODxy = () => {
+        return (
+            <>
+            <TouchableOpacity activeOpacity={0.8} style={{marginHorizontal: 5}}>
+                <ImageBackground source={bgCardShuffle()}
+                                 style={{width: 80, height: 80, borderRadius: 10, overflow: 'hidden'}}>
+                    <View style={{flex: 1, backgroundColor: 'rgba(0,0,0,0,5)'}}>
+
+                    </View>
+                </ImageBackground>
+            </TouchableOpacity>
+            </>
+        )
+    };
 
     render() {
         return (
@@ -21,7 +52,7 @@ class Calendar extends React.Component {
                 </View>
                 <ImageBackground source={bgCardShuffle()} style={{
                     margin: 10,
-                    height: 250,
+                    height: 210,
                     overflow: 'hidden',
                     borderRadius: 10,
                     elevation: 5,
@@ -82,10 +113,31 @@ class Calendar extends React.Component {
                                 />
                             }
                             title="Read Now"
-                            onPress={()=>this.props.navigation.navigate("book_screen", {d: this.props.d})}
+                            onPress={() => this.props.navigation.navigate("book_screen", {
+                                d: this.props.d,
+                                u: this.props.u
+                            })}
                         />
                     </View>
                 </ImageBackground>
+                <View style={{padding: 15}}>
+                    <Text muted h4 bold>Previous Seeds</Text>
+                    <Text muted bold>{'Browser old seeds of destiny...'}</Text>
+                </View>
+                <View style={{margin: 10}}>
+                    <FlatList horizontal={true} showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}
+                              data={this.props.dx.previous} keyExtractor={ext => ext.id}
+                              renderItem={({item, index}) =>this.listSODx(item, index)} />
+                </View>
+                <View style={{padding: 15}}>
+                    <Text muted h4 bold>Future Seeds</Text>
+                    <Text muted bold>{'Browser new seeds of destiny...'}</Text>
+                </View>
+                <View style={{margin: 10}}>
+                    <FlatList horizontal={true} showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}
+                              data={this.props.dx.previous} keyExtractor={ext => ext.id}
+                              renderItem={({item, index}) =>this.listSODxy(item, index)} />
+                </View>
             </View>
             </>
         )

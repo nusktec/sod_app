@@ -63,3 +63,11 @@ export async function getList() {
     let res = await fetch(BASE_URL + "?cmd=all", headersParse);
     return await res.json();
 }
+
+//add views
+export async function addViews(data) {
+    headersParse = remakeHeader();
+    headersParse.body = JSON.stringify(data);
+    let res = await fetch(BASE_URL + "?cmd=add-view", headersParse);
+    return await res.json();
+}
