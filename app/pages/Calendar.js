@@ -12,12 +12,11 @@ import {Button, Icon} from "react-native-elements";
 //export main app
 class Calendar extends React.Component {
 
-    listSODx = () => {
+    listSODx = (d, k) => {
         return (
             <>
-            <TouchableOpacity activeOpacity={0.8} style={{marginHorizontal: 5}}>
-                <ImageBackground source={bgCardShuffle()}
-                                 style={{width: 120, height: 150, borderRadius: 10, overflow: 'hidden'}}>
+            <TouchableOpacity key={k} activeOpacity={0.8} style={{marginHorizontal: 5}}>
+                <ImageBackground source={bgCardShuffle()} style={{width: 120, height: 150, borderRadius: 15, overflow: 'hidden', elevation: 2, margin: 5, borderWidth: 2, borderColor: '#fff'}}>
                     <View style={{flex: 1, backgroundColor: 'rgba(0,0,0,0,5)'}}>
 
                     </View>
@@ -27,12 +26,11 @@ class Calendar extends React.Component {
         )
     };
 
-    listSODxy = () => {
+    listSODxy = (d, k) => {
         return (
             <>
-            <TouchableOpacity activeOpacity={0.8} style={{marginHorizontal: 5}}>
-                <ImageBackground source={bgCardShuffle()}
-                                 style={{width: 80, height: 80, borderRadius: 10, overflow: 'hidden'}}>
+            <TouchableOpacity key={k} activeOpacity={0.8} style={{marginHorizontal: 5}}>
+                <ImageBackground source={bgCardShuffle()} style={{width: 80, height: 80, borderRadius: 15, overflow: 'hidden', elevation: 2, margin: 5, borderWidth: 2, borderColor: '#fff'}}>
                     <View style={{flex: 1, backgroundColor: 'rgba(0,0,0,0,5)'}}>
 
                     </View>
@@ -124,18 +122,18 @@ class Calendar extends React.Component {
                     <Text muted h4 bold>Previous Seeds</Text>
                     <Text muted bold>{'Browser old seeds of destiny...'}</Text>
                 </View>
-                <View style={{margin: 10}}>
+                <View style={{margin: 1}}>
                     <FlatList horizontal={true} showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}
-                              data={this.props.dx.previous} keyExtractor={ext => ext.id}
+                              data={this.props.dx.previous} keyExtractor={ext => {return ext.id}}
                               renderItem={({item, index}) =>this.listSODx(item, index)} />
                 </View>
                 <View style={{padding: 15}}>
                     <Text muted h4 bold>Future Seeds</Text>
                     <Text muted bold>{'Browser new seeds of destiny...'}</Text>
                 </View>
-                <View style={{margin: 10}}>
+                <View style={{margin: 1}}>
                     <FlatList horizontal={true} showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}
-                              data={this.props.dx.previous} keyExtractor={ext => ext.id}
+                              data={this.props.dx.future} keyExtractor={ext => {return ext.id}}
                               renderItem={({item, index}) =>this.listSODxy(item, index)} />
                 </View>
             </View>

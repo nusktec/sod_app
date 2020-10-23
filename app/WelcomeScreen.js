@@ -79,7 +79,7 @@ const WelcomeScreen: () => React$Node = (props) => {
         <SafeAreaView style={{flex: 1, backgroundColor: themeColor().lightTheme.bgWhite}}>
             <ImageBackground source={imagesStore().bg11}
                              style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                <Text bold h2 style={{color: themeColor().lightTheme.bgWhite}}>SEEDS OF DESTINY</Text>
+                <Text bold h2 style={{color: themeColor().lightTheme.bgWhite, textAlign: 'center'}}>SEEDS OF DESTINY</Text>
                 <Text h6 bold style={{color: themeColor().lightTheme.bgWhite}}>Newly Installed ?</Text>
             </ImageBackground>
             <View style={{

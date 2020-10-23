@@ -5,7 +5,7 @@
  */
 //api stuffs
 const STR_KEY = "sod_rdx";
-const BASE_URL = "http://192.168.8.101/sod/api";
+const BASE_URL = "http://192.168.8.101/sod/adm/api";
 export const ASSETS_URL = "http://192.168.8.101/sod/";
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -69,5 +69,21 @@ export async function addViews(data) {
     headersParse = remakeHeader();
     headersParse.body = JSON.stringify(data);
     let res = await fetch(BASE_URL + "?cmd=add-view", headersParse);
+    return await res.json();
+}
+
+//update function
+export async function updateProfile(data) {
+    headersParse = remakeHeader();
+    headersParse.body = JSON.stringify(data);
+    let res = await fetch(BASE_URL + "?cmd=update-user", headersParse);
+    return await res.json();
+}
+
+//notifications function
+export async function getNotifications(data) {
+    headersParse = remakeHeader();
+    headersParse.body = JSON.stringify(data);
+    let res = await fetch(BASE_URL + "?cmd=get-user-noti", headersParse);
     return await res.json();
 }
