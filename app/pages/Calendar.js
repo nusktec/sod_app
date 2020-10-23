@@ -124,7 +124,7 @@ class Calendar extends React.Component {
                 </View>
                 <View style={{margin: 1}}>
                     <FlatList horizontal={true} showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}
-                              data={this.props.dx.previous} keyExtractor={ext => {return ext.id}}
+                              data={this.props.dx.previous} keyExtractor={(ext, dx) => {return ext.id}}
                               renderItem={({item, index}) =>this.listSODx(item, index)} />
                 </View>
                 <View style={{padding: 15}}>
@@ -133,7 +133,7 @@ class Calendar extends React.Component {
                 </View>
                 <View style={{margin: 1}}>
                     <FlatList horizontal={true} showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}
-                              data={this.props.dx.future} keyExtractor={ext => {return ext.id}}
+                              data={this.props.dx.future} keyExtractor={(ext, dx) => {return ext.id}}
                               renderItem={({item, index}) =>this.listSODxy(item, index)} />
                 </View>
             </View>

@@ -4,29 +4,32 @@
  * Developer Revelation A.F *
  */
 import React from "react";
-import {ActivityIndicator, FlatList, View, TouchableOpacity, Modal} from "react-native";
+import {ActivityIndicator, FlatList, View, TouchableOpacity, Modal, Dimensions} from "react-native";
 import {Text} from "galio-framework";
 import {SvgImageView} from "react-native-svg-img";
 import {imagesStore, themeColor} from "../Themes";
-import {getNotifications} from "./../Functions";
 import {Icon, Image} from "react-native-elements";
+import {getAllSODs, ASSETS_URL} from "../Functions";
 
 //export main app
 class List extends React.Component {
     state = {
         isModal: false,
+        focusImage: '',
+        focusTopic: '',
+        focusData: {},
         loading: false,
-        data: [{}],
+        data: [],
     };
 
     componentDidMount() {
-        //do more of internet
-        // setTimeout(() => {
-        //     getNotifications({nuid: this.props.u.mid}).then(res => {
-        //         this.setState({loading: false});
-        //         this.setState({data: res.data});
-        //     })
-        // }, 10);
+        // do more of internet
+        setTimeout(() => {
+            getAllSODs().then(res => {
+                this.setState({loading: false});
+                this.setState({data: res.data});
+            })
+        }, 10);
     }
 
     PlaceHolder = () => {
@@ -48,38 +51,87 @@ class List extends React.Component {
         )
     };
 
+    //get date data
+    getDate = (d, isDay) => {
+        let tmpd = d.split(" ")[0];
+        if (isDay === 1) {
+            return tmpd.split('-')[2];
+        }
+        if (isDay === 2) {
+            let ma = tmpd.split('-')[1];
+            switch (parseInt(ma)) {
+                case 1:
+                    return 'JAN';
+                    break;
+                case 2:
+                    return 'FEB';
+                    break;
+                case 3:
+                    return 'MAR';
+                    break;
+                case 4:
+                    return 'APR';
+                    break;
+                case 5:
+                    return 'MAY';
+                    break;
+                case 6:
+                    return 'JUN';
+                    break;
+                case 7:
+                    return 'JUL';
+                    break;
+                case 8:
+                    return 'AUG';
+                    break;
+                case 9:
+                    return 'SPE';
+                    break;
+                case 10:
+                    return 'OCT';
+                    break;
+                case 11:
+                    return 'NOV';
+                    break;
+                case 12:
+                    return 'DEC';
+                    break;
+                default:
+                    return 'MMM'
+            }
+        }
+    };
+
     //notifications badge
     ItemList = (d, k) => {
         return (
             <>
-            <View style={{
+            <TouchableOpacity activeOpacity={0.8} onPress={() =>{
+                this.setState({focusImage: ASSETS_URL + "/" + d.cimage, focusTopic: d.ctopic, focusData: d}); this.setState({isModal: true})}} style={{
                 flexDirection: 'row',
                 justifyContent: 'center',
                 paddingVertical: 0,
-                backgroundColor: '#fff',
+                backgroundColor: (d.isToday === "1" ? '#ffe6e9' : '#fff'),
                 overflow: 'hidden',
-                borderRadius: 3,
+                borderRadius: 5,
                 margin: 3,
                 height: 80,
                 width: '100%',
                 elevation: 1,
                 alignItems: 'center'
             }}>
-                <TouchableOpacity onPress={()=>this.setState({isModal: true})}>
-                    <Image source={{uri: 'https://i.pinimg.com/236x/84/97/68/849768009d5792d5d83c1bb6e0b3572d.jpg'}}
-                           style={{width: 80, height: '100%', resizeMode: 'cover'}}/>
-                </TouchableOpacity>
-                <View style={{backgroundColor: '#fff', padding: 3, alignItems: 'center'}}>
-                    <Text h2 muted>{'02'}</Text>
-                    <Text italic muted>{'MAY'}</Text>
+                <Image source={{uri: ASSETS_URL + "/" + d.cimage}}
+                       style={{width: 80, height: '100%', resizeMode: 'cover'}}/>
+                <View style={{padding: 3, alignItems: 'center'}}>
+                    <Text h2 bold>{this.getDate(d.cuptime, 1)}</Text>
+                    <Text italic bold>{this.getDate(d.cuptime, 2)}</Text>
                 </View>
-                <View style={{flex: 1, backgroundColor: '#fff', padding: 3}}>
-                    <Text h6 muted>{d.ntitle}</Text>
-                    <Text italic muted>{d.ntext}</Text>
-                    <Text italic bold muted>{d.createdAt}</Text>
+                <View style={{flex: 1, padding: 3}}>
+                    <Text h6 bold>{d.ctopic}</Text>
+                    <Text numberOfLines={2} elipsizeMode={'tail'} italic>{d.cscripture}</Text>
+                    <Text italic bold>{d.cuptime}</Text>
                 </View>
-                <Icon name="arrow-left" family="feather" color={themeColor().lightTheme.INFO}/>
-            </View>
+            </TouchableOpacity>
             </>
         )
     };
@@ -88,7 +140,7 @@ class List extends React.Component {
         return (
             <>
             <View style={{padding: 10}}>
-                <Text bold h3 muted>Seeds Of Destiny</Text>
+                <Text bold h3>Seeds Of Destiny</Text>
                 <Text bold muted>All Data</Text>
             </View>
             <FlatList style={{flex: 1}} showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}
@@ -111,7 +163,7 @@ class List extends React.Component {
                 }} onShow={() => {
 
                 }} statusBarTranslucent animationType="fade" visible={this.state.isModal}>
-                    <TouchableOpacity onPress={() => {
+                    <TouchableOpacity activeOpacity={0.8} onPress={() => {
                         this.setState({isModal: false});
                     }} style={{
                         position: 'absolute',
@@ -122,13 +174,17 @@ class List extends React.Component {
                         padding: 10,
                         margin: 10
                     }}>
-                        <Icon color={themeColor().lightTheme.MUTED} family={'feather'} name={'x'} size={20} raised={true}/>
+                        <Icon color={'#000'} type={'feather'} name={'x'} size={20}
+                              raised={true}/>
                     </TouchableOpacity>
                     <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
-                        <Text h3 bold muted style={{marginVertical: 20}}>Select Gender</Text>
+                        <Text h6 bold>{this.state.focusTopic}</Text>
+                        <Image source={{uri: this.state.focusImage}}
+                               style={{width: Dimensions.get('window').width, height: 400, resizeMode: 'cover'}}/>
                         <TouchableOpacity onPress={() => {
                             //start reg...
-
+                            this.setState({isModal: false});
+                            this.props.navigation.navigate('book_screen', {d: this.state.focusData, u: this.props.u})
                         }} style={{
                             position: 'absolute',
                             bottom: 30,
@@ -137,8 +193,9 @@ class List extends React.Component {
                             justifyContent: 'space-between',
                             padding: 10
                         }}>
-                            <Icon color={themeColor().lightTheme.MUTED} family={'feather'} name={'arrow-right'} size={20}/>
-                            <Text muted bold h6>Continue</Text>
+                            <Icon color={'#000'} family={'feather'} name={'arrow-right'}
+                                  size={20}/>
+                            <Text bold h6>Read Full</Text>
                         </TouchableOpacity>
                     </View>
                 </Modal>

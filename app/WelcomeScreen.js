@@ -42,7 +42,7 @@ const WelcomeScreen: () => React$Node = (props) => {
                     //do login
                     Toast.show({
                         topOffset: 50,
-                        text1: 'Logged In (' + resp.data.mname + ')',
+                        text1: 'Logged In (' + res.data.mname + ')',
                         text2: 'Successfully logged, enjoy your readings...',
                         type: 'success'
                     });
@@ -184,8 +184,8 @@ const WelcomeScreen: () => React$Node = (props) => {
                         justifyContent: 'space-between',
                         padding: 10
                     }}>
-                        <Icon color={themeColor().lightTheme.MUTED} family={'feather'} name={'arrow-right'} size={20}/>
-                        <Text muted bold h6>Continue</Text>
+                        <Icon color={'#000'} family={'feather'} name={'arrow-right'} size={20}/>
+                        <Text bold h6>Continue</Text>
                     </TouchableOpacity>
                 </View>
             </Modal>

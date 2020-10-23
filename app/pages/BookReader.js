@@ -20,10 +20,10 @@ class BookReader extends React.Component {
 
     componentDidMount() {
         setTimeout(() => {
-            this.setState(this.props.route.params.d)
-        }, 5);
-        //add views
-        addViews({mid: this.props.route.params.u.mid, cid: this.state.cid}).then(null).done();
+            //add views
+            addViews({mid: this.props.route.params.u.mid, cid: this.state.cid}).then(null).done();
+        }, 20);
+        this.setState(this.props.route.params.d)
     }
 
     render() {
