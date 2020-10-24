@@ -32,7 +32,7 @@ class BookReader extends React.Component {
             <ScrollView style={{paddingHorizontal: 0, paddingBottom: 100}} showsVerticalScrollIndicator={false}>
                 <View style={{flex: 1}}>
                     <StatusBar translucent barStyle="light-content" backgroundColor={'transparent'}/>
-                    <ImageBackground source={{uri: ASSETS_URL + this.state.cimage}}
+                    <ImageBackground source={{uri: ASSETS_URL + '/'+this.state.cimage}}
                                      style={{width: '100%', height: 300, backgroundColor: '#000'}}>
                         <View style={{backgroundColor: 'rgba(0,0,0,0.5)', flex: 1}}>
                             <TouchableOpacity onPress={() => {
@@ -48,7 +48,7 @@ class BookReader extends React.Component {
                                 <Icon color={'white'} family={'feather'} name={'arrow-left'} size={25} raised={true}/>
                             </TouchableOpacity>
                             <View style={{alignSelf: 'center', padding: 10}}>
-                                <Text bold h3 color={'#fff'}>{this.state.ctopic}</Text>
+                                <Text numberOfLines={1} bold h3 color={'#fff'}>{this.state.ctopic}</Text>
                                 <Text bold color={'#fff'}>{this.state.cuptime}</Text>
                                 <View
                                     style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start'}}>

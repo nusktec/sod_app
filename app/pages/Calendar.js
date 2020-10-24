@@ -8,6 +8,7 @@ import {View, ImageBackground, TouchableOpacity, FlatList} from "react-native";
 import {Text} from "galio-framework";
 import {bgCardShuffle} from "./../Themes";
 import {Button, Icon} from "react-native-elements";
+import Toast from "react-native-toast-message";
 
 //export main app
 class Calendar extends React.Component {
@@ -15,10 +16,17 @@ class Calendar extends React.Component {
     listSODx = (d, k) => {
         return (
             <>
-            <TouchableOpacity key={k} activeOpacity={0.8} style={{marginHorizontal: 5}}>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate("book_screen", {
+                d: d,
+                u: this.props.u
+            })} key={k} activeOpacity={0.8} style={{marginHorizontal: 5}}>
                 <ImageBackground source={bgCardShuffle()} style={{width: 120, height: 150, borderRadius: 15, overflow: 'hidden', elevation: 2, margin: 5, borderWidth: 2, borderColor: '#fff'}}>
-                    <View style={{flex: 1, backgroundColor: 'rgba(0,0,0,0,5)'}}>
-
+                    <View style={{flex: 1, backgroundColor: 'rgba(0,0,0,0.5)', padding: 10, alignItems: 'center', justifyContent: 'center'}}>
+                        <View style={{padding: 3, alignItems: 'center'}}>
+                            <Text color="white" h2 bold>{this.getDate(d.cuptime, 1)}</Text>
+                            <Text color="white" italic bold>{this.getDate(d.cuptime, 2)+' '+this.getDate(d.cuptime, 3).substr(2)}</Text>
+                        </View>
+                        <Text numberOfLines={2} style={{textAlign: 'center'}} color="white" bold>{d.ctopic}</Text>
                     </View>
                 </ImageBackground>
             </TouchableOpacity>
@@ -29,15 +37,80 @@ class Calendar extends React.Component {
     listSODxy = (d, k) => {
         return (
             <>
-            <TouchableOpacity key={k} activeOpacity={0.8} style={{marginHorizontal: 5}}>
+            <TouchableOpacity onPress={()=>{
+                //open old sod
+                Toast.show({
+                    topOffset: 50,
+                    text1: 'Future SOD Locked',
+                    text2: 'SOD Topic and text is locked till date',
+                    type: 'error'
+                });
+            }} key={k} activeOpacity={0.8} style={{marginHorizontal: 5}}>
                 <ImageBackground source={bgCardShuffle()} style={{width: 80, height: 80, borderRadius: 15, overflow: 'hidden', elevation: 2, margin: 5, borderWidth: 2, borderColor: '#fff'}}>
-                    <View style={{flex: 1, backgroundColor: 'rgba(0,0,0,0,5)'}}>
-
+                    <View style={{flex: 1, backgroundColor: 'rgba(0,0,0,0.5)', padding: 10, alignItems: 'center', justifyContent: 'center'}}>
+                        <View style={{padding: 3, alignItems: 'center'}}>
+                            <Text color="white" h2 bold>{this.getDate(d.cuptime, 1)}</Text>
+                            <Text color="white" italic bold>{this.getDate(d.cuptime, 2)+' '+this.getDate(d.cuptime, 3).substr(2)}</Text>
+                        </View>
                     </View>
                 </ImageBackground>
             </TouchableOpacity>
             </>
         )
+    };
+
+    //get date data
+    getDate = (d, isDay) => {
+        let tmpd = d.split(" ")[0];
+        if (isDay === 1) {
+            return tmpd.split('-')[2];
+        }
+        if (isDay === 2) {
+            let ma = tmpd.split('-')[1];
+            switch (parseInt(ma)) {
+                case 1:
+                    return 'JAN';
+                    break;
+                case 2:
+                    return 'FEB';
+                    break;
+                case 3:
+                    return 'MAR';
+                    break;
+                case 4:
+                    return 'APR';
+                    break;
+                case 5:
+                    return 'MAY';
+                    break;
+                case 6:
+                    return 'JUN';
+                    break;
+                case 7:
+                    return 'JUL';
+                    break;
+                case 8:
+                    return 'AUG';
+                    break;
+                case 9:
+                    return 'SPE';
+                    break;
+                case 10:
+                    return 'OCT';
+                    break;
+                case 11:
+                    return 'NOV';
+                    break;
+                case 12:
+                    return 'DEC';
+                    break;
+                default:
+                    return 'MMM'
+            }
+        }
+        if (isDay === 3) {
+            return tmpd.split('-')[0];
+        }
     };
 
     render() {
@@ -53,7 +126,7 @@ class Calendar extends React.Component {
                     height: 210,
                     overflow: 'hidden',
                     borderRadius: 10,
-                    elevation: 5,
+                    elevation: 1,
                     borderWidth: 0,
                     borderColor: '#fff',
                     alignItems: 'center',
@@ -93,7 +166,7 @@ class Calendar extends React.Component {
                         backgroundColor: 'rgba(0,0,0,0.2)',
                         paddingHorizontal: 10
                     }}>
-                        <Text bold h6 color="yellow">{this.props.d.cuptime}</Text>
+                        <Text bold h6 color="yellow">{this.props.d.cuptime.split(' ')[0]}</Text>
                         <Text h6 bold color="white"
                               style={{marginTop: 20, textAlign: 'center'}}>{this.props.d.ctopic}</Text>
                         <Text ellipsizeMode="tail" numberOfLines={3} italic color="white"

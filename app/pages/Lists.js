@@ -100,6 +100,9 @@ class List extends React.Component {
                     return 'MMM'
             }
         }
+        if (isDay === 3) {
+            return tmpd.split('-')[0];
+        }
     };
 
     //notifications badge
@@ -122,12 +125,12 @@ class List extends React.Component {
             }}>
                 <Image source={{uri: ASSETS_URL + "/" + d.cimage}}
                        style={{width: 80, height: '100%', resizeMode: 'cover'}}/>
-                <View style={{padding: 3, alignItems: 'center'}}>
-                    <Text h2 bold>{this.getDate(d.cuptime, 1)}</Text>
-                    <Text italic bold>{this.getDate(d.cuptime, 2)}</Text>
+                <View style={{padding: 8, alignItems: 'center'}}>
+                    <Text h4 bold>{this.getDate(d.cuptime, 1)}</Text>
+                    <Text italic bold>{this.getDate(d.cuptime, 2)+' '+this.getDate(d.cuptime, 3).substr(2)}</Text>
                 </View>
                 <View style={{flex: 1, padding: 3}}>
-                    <Text h6 bold>{d.ctopic}</Text>
+                    <Text numberOfLines={1} h6 bold>{d.ctopic}</Text>
                     <Text numberOfLines={2} elipsizeMode={'tail'} italic>{d.cscripture}</Text>
                     <Text italic bold>{d.cuptime}</Text>
                 </View>

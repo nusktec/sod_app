@@ -94,7 +94,7 @@ const Profile: () => React$Node = (props) => {
                         updateProfile(data).then(res => {
                             if (res.status) {
                                 setIsLogin(res.data).then(resp => {
-                                    console.log(res);
+                                    //console.log(res);
                                 });
                             }
                             Toast.show({
