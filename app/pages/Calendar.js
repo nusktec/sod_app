@@ -19,7 +19,7 @@ class Calendar extends React.Component {
             <TouchableOpacity onPress={() => this.props.navigation.navigate("book_screen", {
                 d: d,
                 u: this.props.u
-            })} key={k} activeOpacity={0.8} style={{marginHorizontal: 5}}>
+            })} key={k} activeOpacity={0.8} style={{marginHorizontal: 0}}>
                 <ImageBackground source={bgCardShuffle()} style={{width: 120, height: 150, borderRadius: 15, overflow: 'hidden', elevation: 2, margin: 5, borderWidth: 2, borderColor: '#fff'}}>
                     <View style={{flex: 1, backgroundColor: 'rgba(0,0,0,0.5)', padding: 10, alignItems: 'center', justifyContent: 'center'}}>
                         <View style={{padding: 3, alignItems: 'center'}}>
@@ -45,7 +45,7 @@ class Calendar extends React.Component {
                     text2: 'SOD Topic and text is locked till date',
                     type: 'error'
                 });
-            }} key={k} activeOpacity={0.8} style={{marginHorizontal: 5}}>
+            }} key={k} activeOpacity={0.8} style={{marginHorizontal: 0}}>
                 <ImageBackground source={bgCardShuffle()} style={{width: 80, height: 80, borderRadius: 15, overflow: 'hidden', elevation: 2, margin: 5, borderWidth: 2, borderColor: '#fff'}}>
                     <View style={{flex: 1, backgroundColor: 'rgba(0,0,0,0.5)', padding: 10, alignItems: 'center', justifyContent: 'center'}}>
                         <View style={{padding: 3, alignItems: 'center'}}>

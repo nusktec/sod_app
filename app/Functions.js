@@ -95,3 +95,19 @@ export async function getAllSODs(data) {
     let res = await fetch(BASE_URL + "?cmd=get-all", headersParse);
     return await res.json();
 }
+
+//get all comments
+export async function getComments(data) {
+    headersParse = remakeHeader();
+    headersParse.body = JSON.stringify(data);
+    let res = await fetch(BASE_URL + "?cmd=get-comments", headersParse);
+    return await res.json();
+}
+
+//get all comments
+export async function setComments(data) {
+    headersParse = remakeHeader();
+    headersParse.body = JSON.stringify(data);
+    let res = await fetch(BASE_URL + "?cmd=add-comment", headersParse);
+    return await res.json();
+}

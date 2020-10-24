@@ -10,6 +10,7 @@ import {SvgImageView} from "react-native-svg-img";
 import {imagesStore, themeColor} from "../Themes";
 import {Icon, Image} from "react-native-elements";
 import {getAllSODs, ASSETS_URL} from "../Functions";
+import LottieView from 'lottie-react-native';
 
 //export main app
 class List extends React.Component {
@@ -37,12 +38,8 @@ class List extends React.Component {
             <>
             <View style={{flex: 1}}>
                 <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                    <SvgImageView
-                        width={300}
-                        height={200}
-                        source={imagesStore().smile}
-                    />
-                    <Text bold h5>All Seeds Of Destiny</Text>
+                    <LottieView style={{width: 200, height: 200}} source={imagesStore().lottie_loader2} autoPlay loop/>
+                    <Text bold h5>Seeds Of Destiny</Text>
                     <Text bold muted>Looking For...</Text>
                     <ActivityIndicator animating={this.state.loading} color="black" style={{margin: 10}}/>
                 </View>
@@ -149,8 +146,7 @@ class List extends React.Component {
             <FlatList style={{flex: 1}} showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}
                       data={this.state.data} keyExtractor={ext => {
                 return ext.id
-            }}
-                      renderItem={({item, index}) => this.ItemList(item, index)}/>
+            }} renderItem={({item, index}) => this.ItemList(item, index)}/>
             </>
         )
     };

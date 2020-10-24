@@ -36,22 +36,22 @@ const Home: () => React$Node = (props) => {
         isLogin().then(r=>{
             setXProfile(r);
         });
-        const backAction = () => {
-            Alert.alert("Hold on !", "Are you sure you want to go quit ?", [
-                {
-                    text: "Cancel",
-                    onPress: () => null,
-                    style: "cancel"
-                },
-                {text: "Yes", onPress: () => BackHandler.exitApp()}
-            ]);
-            return true;
-        };
-        const backHandler = BackHandler.addEventListener(
-            "hardwareBackPress",
-            backAction
-        );
-        return () => backHandler.remove();
+        // const backAction = () => {
+        //     Alert.alert("Hold on !", "Are you sure you want to go quit ?", [
+        //         {
+        //             text: "Cancel",
+        //             onPress: () => null,
+        //             style: "cancel"
+        //         },
+        //         {text: "Yes", onPress: () => BackHandler.exitApp()}
+        //     ]);
+        //     return true;
+        // };
+        // const backHandler = BackHandler.addEventListener(
+        //     "hardwareBackPress",
+        //     backAction
+        // );
+        // return () => backHandler.remove();
     }, []);
 
     //main retry func
