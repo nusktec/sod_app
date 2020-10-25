@@ -8,9 +8,11 @@ import {ActivityIndicator, FlatList, View, TouchableOpacity, Modal, Dimensions} 
 import {Text} from "galio-framework";
 import {SvgImageView} from "react-native-svg-img";
 import {imagesStore, themeColor} from "../Themes";
-import {Icon, Image} from "react-native-elements";
+import {Icon, Image, Tile} from "react-native-elements";
 import {getAllSODs, ASSETS_URL} from "../Functions";
 import LottieView from 'lottie-react-native';
+import {Button} from "galio-framework";
+import Toast from "react-native-toast-message";
 
 //export main app
 class List extends React.Component {
@@ -106,8 +108,19 @@ class List extends React.Component {
     ItemList = (d, k) => {
         return (
             <>
-            <TouchableOpacity activeOpacity={0.8} onPress={() =>{
-                this.setState({focusImage: ASSETS_URL + "/" + d.cimage, focusTopic: d.ctopic, focusData: d}); this.setState({isModal: true})}} style={{
+            <TouchableOpacity activeOpacity={0.8} onPress={() => {
+                if (parseInt(d.isRead) === 1) {
+                    this.setState({focusImage: ASSETS_URL + "/" + d.cimage, focusTopic: d.ctopic, focusData: d});
+                    this.setState({isModal: true})
+                } else {
+                    Toast.show({
+                        topOffset: 50,
+                        text1: 'Unable to read future SOD',
+                        text2: 'Read SOD below the marked/highlighted date',
+                        type: 'error'
+                    });
+                }
+            }} style={{
                 flexDirection: 'row',
                 justifyContent: 'center',
                 paddingVertical: 0,
@@ -124,7 +137,7 @@ class List extends React.Component {
                        style={{width: 80, height: '100%', resizeMode: 'cover'}}/>
                 <View style={{padding: 8, alignItems: 'center'}}>
                     <Text h4 bold>{this.getDate(d.cuptime, 1)}</Text>
-                    <Text italic bold>{this.getDate(d.cuptime, 2)+' '+this.getDate(d.cuptime, 3).substr(2)}</Text>
+                    <Text italic bold>{this.getDate(d.cuptime, 2) + ' ' + this.getDate(d.cuptime, 3).substr(2)}</Text>
                 </View>
                 <View style={{flex: 1, padding: 3}}>
                     <Text numberOfLines={1} h6 bold>{d.ctopic}</Text>
@@ -177,25 +190,26 @@ class List extends React.Component {
                               raised={true}/>
                     </TouchableOpacity>
                     <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
-                        <Text h6 bold>{this.state.focusTopic}</Text>
-                        <Image source={{uri: this.state.focusImage}}
-                               style={{width: Dimensions.get('window').width, height: 400, resizeMode: 'cover'}}/>
-                        <TouchableOpacity onPress={() => {
+                        <Text h4 bold>{this.state.focusTopic}</Text>
+                        <Text style={{padding: 10}}>See Attached Image</Text>
+                        <Tile
+                            style={{width: Dimensions.get('window').width, height: 400, resizeMode: 'cover'}}
+                            imageSrc={{uri: this.state.focusImage}}
+                            title={this.state.focusData.cscripture}
+                            featured
+                            caption={this.state.focusData.cuptime}
+                        />
+                        <Button onPress={() => {
                             //start reg...
                             this.setState({isModal: false});
                             this.props.navigation.navigate('book_screen', {d: this.state.focusData, u: this.props.u})
                         }} style={{
                             position: 'absolute',
                             bottom: 30,
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            justifyContent: 'space-between',
                             padding: 10
                         }}>
-                            <Icon color={'#000'} family={'feather'} name={'arrow-right'}
-                                  size={20}/>
-                            <Text bold h6>Read Full</Text>
-                        </TouchableOpacity>
+                            Read Full Text
+                        </Button>
                     </View>
                 </Modal>
             </View>

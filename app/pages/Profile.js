@@ -4,12 +4,12 @@
  * Developer Revelation A.F *
  */
 import React, {useState} from "react";
-import {View, TouchableOpacity, Dimensions, ScrollView} from "react-native";
+import {View, TouchableOpacity, Dimensions, ScrollView, Alert} from "react-native";
 import {Button, Input, Text} from "galio-framework";
 import Toast from "react-native-toast-message";
 import {imagesStore, themeColor} from "../Themes";
 import {SvgImageView} from "react-native-svg-img";
-import {setIsLogin, updateProfile} from "../Functions";
+import {logOut, setIsLogin, updateProfile} from "../Functions";
 
 //export main app
 const Profile: () => React$Node = (props) => {
@@ -113,7 +113,22 @@ const Profile: () => React$Node = (props) => {
                         <Button round iconFamily={'feather'} icon={'log-out'} size={'large'} color="danger"
                                 onPress={() => {
                                     //logout
-
+                                    Alert.alert(
+                                        "Logout",
+                                        "Really want to logout your account ?",
+                                        [
+                                            {
+                                                text: "Cancel",
+                                                onPress: null,
+                                                style: "cancel"
+                                            },
+                                            { text: "Yes", onPress: () => {
+                                                logOut().then().done();
+                                                Alert.alert("You profile has been cleared, login required on next launch")
+                                            } }
+                                        ],
+                                        { cancelable: false }
+                                    );
                                 }}>Logout</Button>
                     </View>
                 </View>

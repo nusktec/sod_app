@@ -33,7 +33,7 @@ const Home: () => React$Node = (props) => {
     const [menu, setXMenu] = useState(1);
     useEffect(() => {
         //fetch users
-        isLogin().then(r=>{
+        isLogin().then(r => {
             setXProfile(r);
         });
         // const backAction = () => {
@@ -71,12 +71,15 @@ const Home: () => React$Node = (props) => {
         setTimeout(() => {
             getList().then(res => {
                 if (res.status) {
-                    setXLoader(false);
                     setXData(res.data);
-                    setXToday(res.data.today);
+                    let _today = res.data.today;
+                    if (typeof _today === 'object' && parseInt(_today.cstatus) === 1) {
+                        setXLoader(false);
+                        setXToday(_today);
+                    }
                 } else {
                     setXLoader(true);
-                    retryBox();
+                    //retryBox();
                 }
             }).catch(err => {
                 setXLoader(true);

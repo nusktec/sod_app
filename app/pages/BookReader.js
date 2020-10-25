@@ -5,24 +5,23 @@
  */
 import React from "react";
 import {
-    View,
-    TouchableOpacity,
-    StatusBar,
+    Dimensions,
+    FlatList,
     ImageBackground,
     Linking,
     ScrollView,
     Share,
-    FlatList,
-    Dimensions
+    StatusBar,
+    TouchableOpacity,
+    View
 } from "react-native";
-import {Icon, Text, Button as Buttonx, Input} from "galio-framework";
-import {ASSETS_URL, addViews, getComments, setComments} from "./../Functions";
+import {Button as Buttonx, Icon, Input, Text} from "galio-framework";
+import {addViews, ASSETS_URL, getComments, setComments} from "./../Functions";
 import {themeColor} from "../Themes";
 import {Avatar, Badge, Button, Card} from "react-native-elements";
-import HTML from 'react-native-render-html';
-import Tts from 'react-native-tts';
+import HTML from "react-native-render-html";
+import Tts from "react-native-tts";
 import BottomSheet from "react-native-simple-bottom-sheet";
-import TimeAgo from 'react-native-timeago';
 import Toast from "react-native-toast-message";
 //export main app
 let _mounted = false;
@@ -42,10 +41,10 @@ class BookReader extends React.Component {
         }).done();
         this.loadComments();
         //bottom sheet
-        setTimeout(() => {
-            if (_mounted)
-                this.btnSheet.togglePanel();
-        }, 5000);
+        // setTimeout(() => {
+        //     if (_mounted)
+        //         this.btnSheet.togglePanel();
+        // }, 10000);
         _mounted = true;
     }
 
@@ -116,49 +115,41 @@ class BookReader extends React.Component {
         )
     };
 
-    //time ago
-    timeSince = (date) => {
-        if (typeof date !== 'object') {
-            date = new Date(date);
-        }
-
-        let seconds = Math.floor((new Date() - date) / 1000);
-        let intervalType;
-
-        let interval = Math.floor(seconds / 31536000);
-        if (interval >= 1) {
-            intervalType = 'year';
-        } else {
-            interval = Math.floor(seconds / 2592000);
-            if (interval >= 1) {
-                intervalType = 'month';
-            } else {
-                interval = Math.floor(seconds / 86400);
-                if (interval >= 1) {
-                    intervalType = 'day';
-                } else {
-                    interval = Math.floor(seconds / 3600);
-                    if (interval >= 1) {
-                        intervalType = "hour";
-                    } else {
-                        interval = Math.floor(seconds / 60);
-                        if (interval >= 1) {
-                            intervalType = "minute";
-                        } else {
-                            interval = seconds;
-                            intervalType = "second";
-                        }
-                    }
-                }
-            }
-        }
-
-        if (interval > 1 || interval === 0) {
-            intervalType += 's';
-        }
-
-        return interval + ' ' + intervalType;
+    toTimestamp = (strDate) => {
+        let revtime = strDate.replace(/-/g, '/');
+        let datum = Date.parse(revtime);
+        return datum / 1000;
     };
+
+    TimeAgo = (ts) => {
+        // This function computes the delta between the
+        // provided timestamp and the current time, then test
+        // the delta for predefined ranges.
+
+        let d = new Date();  // Gets the current time
+        let nowTs = Math.floor(d.getTime() / 1000); // getTime() returns milliseconds, and we need seconds, hence the Math.floor and division by 1000
+        let seconds = nowTs - ts;
+
+        // more that two days
+        if (seconds > 2*24*3600) {
+            return "days ago";
+        }
+        // a day
+        if (seconds > 24*3600) {
+            return "yesterday";
+        }
+
+        if (seconds > 3600) {
+            return "hours ago";
+        }
+        if (seconds > 1800) {
+            return "Half an hour ago";
+        }
+        if (seconds > 60) {
+            return Math.floor(seconds/60) + " minutes ago";
+        }
+    };
+
     //comments view
     ItemList = (d, k) => {
         return (
@@ -184,7 +175,7 @@ class BookReader extends React.Component {
                         onPress={() => null}
                         activeOpacity={0.7}
                     />
-                    <Text muted italic>{d.mname} - <TimeAgo time={d.createdAt.toString()} locale='vi'/></Text>
+                    <Text muted italic>{d.mname} - {this.TimeAgo(this.toTimestamp(d.createdAt))}</Text>
                 </View>
             </View>
             </>
@@ -306,7 +297,7 @@ class BookReader extends React.Component {
                     Comments</Buttonx>
             </View>
             <BottomSheet ref={ref => this.btnSheet = ref} sliderMinHeight={0}
-                         sliderMaxHeight={Dimensions.get('window').height - 50}>
+                         sliderMaxHeight={Dimensions.get('window').height - 200}>
                 <View style={{padding: 10}}>
                     <Text bold h6 muted>Seeds Of Destiny</Text>
                     <Text numberOfLine={1} bold

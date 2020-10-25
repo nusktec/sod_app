@@ -24,6 +24,22 @@ export async function isLogin() {
         throw e.message;
     }
 }
+
+export async function logOut() {
+    try {
+        const value = await AsyncStorage.clear();
+        if (value !== null) {
+            // value previously stored
+
+        } else {
+
+        }
+    } catch (e) {
+        // error reading value
+        throw e.message;
+    }
+}
+
 //set is login
 export async function setIsLogin(data) {
     try {
