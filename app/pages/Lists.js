@@ -4,7 +4,7 @@
  * Developer Revelation A.F *
  */
 import React from "react";
-import {ActivityIndicator, FlatList, View, TouchableOpacity, Modal, Dimensions} from "react-native";
+import {ActivityIndicator, FlatList, View, TouchableOpacity, Modal, Dimensions, Linking, Alert} from "react-native";
 import {Text} from "galio-framework";
 import {SvgImageView} from "react-native-svg-img";
 import {imagesStore, themeColor} from "../Themes";
@@ -190,25 +190,42 @@ class List extends React.Component {
                               raised={true}/>
                     </TouchableOpacity>
                     <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
-                        <Text h4 bold>{this.state.focusTopic}</Text>
-                        <Text style={{padding: 10}}>See Attached Image</Text>
+                        <Text h4 bold style={{textAlign: 'center'}}>{this.state.focusTopic}</Text>
+                        <Text style={{padding: 10}}>See Attached Image. Click to download banner</Text>
                         <Tile
-                            style={{width: Dimensions.get('window').width, height: 400, resizeMode: 'cover'}}
+                            onPress={()=>{
+                                //open web address
+                                Alert.alert(
+                                    "SOD Banner",
+                                    "Want to download this image attachment ?",
+                                    [
+                                        {
+                                            text: "Cancel",
+                                            onPress: null,
+                                            style: "cancel"
+                                        },
+                                        { text: "Yes", onPress: () => {
+                                            Linking.openURL(this.state.focusImage)
+                                        } }
+                                    ],
+                                    { cancelable: false }
+                                );
+                            }}
+                            style={{width: Dimensions.get('window').width, height: 500, resizeMode: 'cover'}}
                             imageSrc={{uri: this.state.focusImage}}
                             title={this.state.focusData.cscripture}
-                            featured
                             caption={this.state.focusData.cuptime}
                         />
-                        <Button onPress={() => {
+                        <Button size={'large'} onPress={() => {
                             //start reg...
                             this.setState({isModal: false});
                             this.props.navigation.navigate('book_screen', {d: this.state.focusData, u: this.props.u})
-                        }} style={{
+                        }} titleStyle={{fontWeight: 'bold'}} style={{
                             position: 'absolute',
                             bottom: 30,
                             padding: 10
                         }}>
-                            Read Full Text
+                            READ FULL TEXT
                         </Button>
                     </View>
                 </Modal>

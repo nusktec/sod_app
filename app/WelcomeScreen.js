@@ -68,9 +68,9 @@ const WelcomeScreen: () => React$Node = (props) => {
                 text2: 'Error logging in  at the moment...',
                 type: 'error'
             });
+            setModal(false);
+            setLoading(false);
         });
-        setModal(false);
-        setLoading(false);
     };
 
     return (

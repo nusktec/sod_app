@@ -5,8 +5,8 @@
  */
 //api stuffs
 const STR_KEY = "sod_rdx";
-const BASE_URL = "http://192.168.8.100/sod/adm/api";
-export const ASSETS_URL = "http://192.168.8.100/sod/adm";
+const BASE_URL = "https://adm.seedsofdestiny.live/api";
+export const ASSETS_URL = "https://adm.seedsofdestiny.live";
 import AsyncStorage from '@react-native-community/async-storage';
 
 //fetch login details
