@@ -158,15 +158,15 @@ android {
             keyPassword 'android'
         }
     }
-    flavorDimensions 'prodDim'
-    productFlavors {
-        prodFlavor {
-            dimension 'prodDim'
-            applicationId 'com.nsc.sodapp'
-            versionCode 23
-            versionName '23.0'
-        }
-    }
+//    flavorDimensions 'prodDim'
+//    productFlavors {
+//        prodFlavor {
+//            dimension 'prodDim'
+//            applicationId 'com.nsc.sodapp'
+//            versionCode 23
+//            versionName '23.0'
+//        }
+//    }
     buildTypes {
         debug {
             signingConfig signingConfigs.debug

@@ -4,11 +4,12 @@
  * Developer Revelation A.F *
  */
 import React, {useState} from "react";
-import {View, TouchableOpacity, Dimensions, ScrollView, Alert, Image} from "react-native";
+import {View, TouchableOpacity, Dimensions, ScrollView, Alert, Image, Modal, Linking} from "react-native";
 import {Button, Input, Text} from "galio-framework";
 import Toast from "react-native-toast-message";
 import {imagesStore, themeColor} from "../Themes";
 import {logOut, setIsLogin, updateProfile} from "../Functions";
+import {Card, Icon} from "react-native-elements";
 
 //export main app
 const Profile: () => React$Node = (props) => {
@@ -17,12 +18,13 @@ const Profile: () => React$Node = (props) => {
     const [xemail, setXEmail] = useState(props.u.memail);
     const [xnames, setXName] = useState(props.u.mname);
     const [xgender, setXGender] = useState(props.u.mgender);
+    const [xmodal, setXModal] = useState(false);
 
     return (
         <>
         <ScrollView style={{paddingHorizontal: 0, marginTop: 40}} showsVerticalScrollIndicator={false}>
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                <Image style={{width: 200, height: 200}} source={imagesStore().profilex}/>
+                <Image style={{width: 200, height: 200, resizeMode: 'contain'}} source={imagesStore().profilex}/>
                 <View style={{
                     backgroundColor: '#fff',
                     borderRadius: 15,
@@ -104,6 +106,13 @@ const Profile: () => React$Node = (props) => {
                                 setLoading(false);
                             });
                         }}>Update Profile</Button>
+
+                        <Button round iconFamily={'feather'} icon={'code'} size={'large'} color={themeColor().lightTheme.INFO}
+                                onPress={() => {
+                                    //show modal
+                                    setXModal(true);
+                                }}>Contact Us | Complaint</Button>
+
                         <Button round iconFamily={'feather'} icon={'log-out'} size={'large'} color="danger"
                                 onPress={() => {
                                     //logout
@@ -124,10 +133,51 @@ const Profile: () => React$Node = (props) => {
                                         { cancelable: false }
                                     );
                                 }}>Logout</Button>
+
                     </View>
                 </View>
             </View>
         </ScrollView>
+
+        <Modal onDismiss={() => {
+            //setTBar('light-content')
+        }} onShow={() => {
+            //setTBar('dark-content')
+        }} statusBarTranslucent
+               animationType="fade" visible={xmodal}>
+            <TouchableOpacity onPress={() => {
+                setXModal(false);
+            }} style={{
+                position: 'absolute',
+                top: 30,
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: 10,
+                margin: 10
+            }}>
+                <Icon color={'#000'} type={'feather'} name={'x'} size={20} raised={true}/>
+            </TouchableOpacity>
+            <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
+                <Image style={{width: 200, height: 200, resizeMode: 'contain'}} source={imagesStore().developer}/>
+                <Text h4 style={{marginBottom: 10}}>App Info</Text>
+                <Card>
+                    <Card.Title>Seeds Of Destiny | App Developer</Card.Title>
+                    <Card.Divider/>
+                    <Text style={{marginBottom: 10}}>Company: RSC BYTE LTD</Text>
+                    <Text bold style={{marginBottom: 10}}>Licensed: Dunamis Int'l Gospel Centre</Text>
+                    <Text style={{marginBottom: 10}}>Web: www.seedsofdestiny.live</Text>
+                    <Text style={{marginBottom: 10}}>Email: nusktecsoft@gmail.com</Text>
+                    <Text style={{marginBottom: 10}}>Phone: 234-8164242320</Text>
+                </Card>
+                <Button onPress={() => {
+                    //start reg...
+                    Linking.openURL(`whatsapp://send?phone=2348164242320&text=${"Seeds Of Destiny Contact Form: Hello ?"}`)
+                }}  style={{
+                }}><Text color="white" bold>Chat With Developer</Text></Button>
+            </View>
+        </Modal>
+
         </>
     )
 };

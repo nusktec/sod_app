@@ -44,6 +44,7 @@ export function imagesStore() {
         notif: require('./../assets/svgs/noti.svg'),
         profilex: require('./../assets/profilex.png'),
         gender: require('./../assets/gender.png'),
+        developer: require('./../assets/developer.png'),
         alert: require('./../assets/alert.png'),
         read1: require('./../assets/svgs/read_2.svg'),
         male: require('./../assets/svgs/male.svg'),

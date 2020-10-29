@@ -152,7 +152,7 @@ const WelcomeScreen: () => React$Node = (props) => {
                 </TouchableOpacity>
                 <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
                     <Text h3 bold muted style={{marginVertical: 20}}>Select Gender</Text>
-                    <Image style={{width: 200, height: 200}} source={imagesStore().gender}/>
+                    <Image style={{width: 200, height: 200, resizeMode: 'contain'}} source={imagesStore().gender}/>
                     <Button style={{marginTop: 50}} round iconFamily={'feather'}
                             icon={(xgender === 'M' ? 'check' : 'x')}
                             size={'small'} color="success"

@@ -33,7 +33,7 @@ class Notifications extends React.Component {
             <>
             <View style={{flex: 1}}>
                 <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                    <Image style={{width: 200, height: 200}} source={imagesStore().alert}/>
+                    <Image style={{width: 200, height: 200, resizeMode: 'contain'}} source={imagesStore().alert}/>
                     <Text bold h5>Notifications</Text>
                     <Text bold muted>Only specified appears here...</Text>
                     <ActivityIndicator animating={this.state.loading} color="black" style={{margin: 10}}/>
