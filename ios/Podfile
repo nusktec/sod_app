@@ -16,6 +16,8 @@ target 'sod_app' do
 
   pod 'TextToSpeech', :path => '../node_modules/react-native-tts'
 
+  pod 'react-native-onesignal', :path => '../node_modules/react-native-onesignal'
+
   target 'sod_appTests' do
     inherit! :complete
     # Pods for testing

@@ -4,9 +4,8 @@
  * Developer Revelation A.F *
  */
 import React from "react";
-import {ActivityIndicator, FlatList, View} from "react-native";
+import {ActivityIndicator, FlatList, Image, View} from "react-native";
 import {Text} from "galio-framework";
-import {SvgImageView} from "react-native-svg-img";
 import {imagesStore, themeColor} from "../Themes";
 import {getNotifications} from "./../Functions";
 import {Icon} from "react-native-elements";
@@ -34,11 +33,7 @@ class Notifications extends React.Component {
             <>
             <View style={{flex: 1}}>
                 <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                    <SvgImageView
-                        width={300}
-                        height={200}
-                        source={imagesStore().notif}
-                    />
+                    <Image style={{width: 200, height: 200}} source={imagesStore().alert}/>
                     <Text bold h5>Notifications</Text>
                     <Text bold muted>Only specified appears here...</Text>
                     <ActivityIndicator animating={this.state.loading} color="black" style={{margin: 10}}/>

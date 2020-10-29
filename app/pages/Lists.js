@@ -6,7 +6,6 @@
 import React from "react";
 import {ActivityIndicator, FlatList, View, TouchableOpacity, Modal, Dimensions, Linking, Alert} from "react-native";
 import {Text} from "galio-framework";
-import {SvgImageView} from "react-native-svg-img";
 import {imagesStore, themeColor} from "../Themes";
 import {Icon, Image, Tile} from "react-native-elements";
 import {getAllSODs, ASSETS_URL} from "../Functions";
@@ -152,7 +151,7 @@ class List extends React.Component {
     MainPage = () => {
         return (
             <>
-            <View style={{padding: 10}}>
+            <View style={{padding: 10, marginTop: 20}}>
                 <Text bold h3>Seeds Of Destiny</Text>
                 <Text bold muted>All Data</Text>
             </View>

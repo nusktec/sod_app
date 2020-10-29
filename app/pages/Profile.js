@@ -4,11 +4,10 @@
  * Developer Revelation A.F *
  */
 import React, {useState} from "react";
-import {View, TouchableOpacity, Dimensions, ScrollView, Alert} from "react-native";
+import {View, TouchableOpacity, Dimensions, ScrollView, Alert, Image} from "react-native";
 import {Button, Input, Text} from "galio-framework";
 import Toast from "react-native-toast-message";
 import {imagesStore, themeColor} from "../Themes";
-import {SvgImageView} from "react-native-svg-img";
 import {logOut, setIsLogin, updateProfile} from "../Functions";
 
 //export main app
@@ -23,12 +22,7 @@ const Profile: () => React$Node = (props) => {
         <>
         <ScrollView style={{paddingHorizontal: 0, marginTop: 40}} showsVerticalScrollIndicator={false}>
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                <SvgImageView
-                    style={{alignSelf: 'center'}}
-                    width={300}
-                    height={200}
-                    source={imagesStore().read}
-                />
+                <Image style={{width: 200, height: 200}} source={imagesStore().profilex}/>
                 <View style={{
                     backgroundColor: '#fff',
                     borderRadius: 15,

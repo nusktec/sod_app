@@ -52,7 +52,9 @@ const Home: () => React$Node = (props) => {
         //     backAction
         // );
         // return () => backHandler.remove();
+        // Replace 'YOUR_ONESIGNAL_APP_ID' with your OneSignal App ID.
     }, []);
+
 
     //main retry func
     const retryBox = () => {
@@ -101,7 +103,7 @@ const Home: () => React$Node = (props) => {
             {
                 loading ? <MainLoader/> :
                     <>
-                    <View style={{flex: 1}}>
+                    <View style={{flex: 1, marginTop: 20}}>
                         <View style={{flex: 1}}>
                             {menu === 1 ? <Calendar {...props} dx={xdata} d={xtoday} u={profile}/> : null}
                             {menu === 2 ? <List {...props} d={xdata} u={profile}/> : null}

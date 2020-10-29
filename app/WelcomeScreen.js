@@ -5,13 +5,10 @@
  * @format
  * @flow strict-local
  */
-
 import React, {useState} from "react";
-import {ImageBackground, SafeAreaView, StatusBar, View, Modal, TouchableOpacity, Linking} from "react-native";
+import {ImageBackground, SafeAreaView, StatusBar, View, Modal, TouchableOpacity, Linking, Image} from "react-native";
 import {Button, Icon, Input, Text} from "galio-framework";
 import Toast from "react-native-toast-message";
-import SvgImageView from 'react-native-svg-img';
-
 import {imagesStore, themeColor} from "./Themes";
 import {doLogin, setIsLogin} from "./Functions";
 
@@ -151,15 +148,11 @@ const WelcomeScreen: () => React$Node = (props) => {
                     padding: 10,
                     margin: 10
                 }}>
-                    <Icon color={themeColor().lightTheme.MUTED} family={'feather'} name={'x'} size={20} raised={true}/>
+                    <Icon color={'#000'} family={'feather'} name={'x'} size={20} raised={true}/>
                 </TouchableOpacity>
                 <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
                     <Text h3 bold muted style={{marginVertical: 20}}>Select Gender</Text>
-                    <SvgImageView
-                        width={300}
-                        height={200}
-                        source={imagesStore().smile}
-                    />
+                    <Image style={{width: 200, height: 200}} source={imagesStore().gender}/>
                     <Button style={{marginTop: 50}} round iconFamily={'feather'}
                             icon={(xgender === 'M' ? 'check' : 'x')}
                             size={'small'} color="success"
@@ -173,20 +166,14 @@ const WelcomeScreen: () => React$Node = (props) => {
                                 //open youtube
                                 setXGenger('F');
                             }}>FEMALE</Button>
-                    <TouchableOpacity onPress={() => {
+                    <Button onPress={() => {
                         //start reg...
                         submitReg();
-                    }} style={{
+                    }} size={'large'} style={{
                         position: 'absolute',
                         bottom: 30,
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
                         padding: 10
-                    }}>
-                        <Icon color={'#000'} family={'feather'} name={'arrow-right'} size={20}/>
-                        <Text bold h6>Continue</Text>
-                    </TouchableOpacity>
+                    }}><Text color="white" h4 bold>Continue</Text></Button>
                 </View>
             </Modal>
         </SafeAreaView>

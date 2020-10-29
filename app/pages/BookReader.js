@@ -121,34 +121,33 @@ class BookReader extends React.Component {
         return datum / 1000;
     };
 
-    TimeAgo = (ts) => {
-        // This function computes the delta between the
-        // provided timestamp and the current time, then test
-        // the delta for predefined ranges.
+    static TimeAgo(ts) {
 
-        let d = new Date();  // Gets the current time
-        let nowTs = Math.floor(d.getTime() / 1000); // getTime() returns milliseconds, and we need seconds, hence the Math.floor and division by 1000
-        let seconds = nowTs - ts;
+        let seconds = Math.floor((new Date() - new Date(ts.toString().replace(" ","T"))) / 1000);
 
-        // more that two days
-        if (seconds > 2*24*3600) {
-            return "days ago";
-        }
-        // a day
-        if (seconds > 24*3600) {
-            return "yesterday";
-        }
+        let interval = Math.floor(seconds / 31536000);
 
-        if (seconds > 3600) {
-            return "hours ago";
+        if (interval > 1) {
+            return interval + " years";
         }
-        if (seconds > 1800) {
-            return "Half an hour ago";
+        interval = Math.floor(seconds / 2592000);
+        if (interval > 1) {
+            return interval + " months";
         }
-        if (seconds > 60) {
-            return Math.floor(seconds/60) + " minutes ago";
+        interval = Math.floor(seconds / 86400);
+        if (interval > 1) {
+            return interval + " days";
         }
-    };
+        interval = Math.floor(seconds / 3600);
+        if (interval > 1) {
+            return interval + " hours";
+        }
+        interval = Math.floor(seconds / 60);
+        if (interval > 1) {
+            return interval + " minutes";
+        }
+        return Math.floor(seconds) + " seconds";
+    }
 
     //comments view
     ItemList = (d, k) => {
@@ -175,7 +174,7 @@ class BookReader extends React.Component {
                         onPress={() => null}
                         activeOpacity={0.7}
                     />
-                    <Text muted italic>{d.mname} - {this.TimeAgo(this.toTimestamp(d.createdAt))}</Text>
+                    <Text muted italic>{d.mname} - {BookReader.TimeAgo(d.createdAt)}</Text>
                 </View>
             </View>
             </>
@@ -282,7 +281,7 @@ class BookReader extends React.Component {
             }}>
                 <Buttonx onPress={() => {
                     //share or invite user to download app
-                    this.onShare('*Dunamis Int\'l Gospel Centre*\nOur Daily Seeds Of Destiny.\n\n*Today: ' + this.state.cuptime + '*\nTopic: ' + this.state.ctopic + '\nScripture: ' + this.state.cscripture + '\n\nDownload to read full text\nhttps://play.google.com/store/apps/details?id=com.nsc.sodapp', 'Invite a friend');
+                    this.onShare('*Dunamis Int\'l Gospel Centre*\nToday\'s Seeds Of Destiny.\n\n*Today: ' + this.state.cuptime + '*\nTopic: ' + this.state.ctopic + '\nScripture: ' + this.state.cscripture + '\n\nDownload to read full text\nhttps://play.google.com/store/apps/details?id=com.nsc.sodapp', 'Invite a friend');
                 }} onlyIcon icon="share-2" iconFamily="feather" color="#fff" iconColor="#000"
                          size={'small'}>Share</Buttonx>
                 <Buttonx onPress={() => {
@@ -340,7 +339,7 @@ class BookReader extends React.Component {
                         } else {
                             //Oya send
                             this.setState({xwait: true});
-                            let _data = {cbody: this.state.xcomm, uid: this.state.uid, cid: this.state.cid};
+                            let _data = {cbody: this.state.xcomm, uid: this.state.uid, cid: this.state.cid, ctime: new Date().toISOString()};
                             setComments(_data).then(res => {
                                 this.setState({xwait: false});
                                 Toast.show({
