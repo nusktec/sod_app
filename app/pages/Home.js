@@ -4,7 +4,7 @@
  * Developer Revelation A.F *
  */
 import React, {useEffect, useState} from 'react';
-import {StatusBar, View, BackHandler, Alert, SafeAreaView, TouchableOpacity} from 'react-native';
+import {StatusBar, View, BackHandler, Alert, SafeAreaView, TouchableOpacity, ScrollView} from 'react-native';
 import {Text, Button, Icon} from "galio-framework";
 import {imagesStore, themeColor} from "./../Themes";
 import LottieView from 'lottie-react-native';
@@ -104,18 +104,21 @@ const Home: () => React$Node = (props) => {
                 loading ? <MainLoader/> :
                     <>
                     <View style={{flex: 1, marginTop: 20}}>
-                        <View style={{flex: 1}}>
-                            {menu === 1 ? <Calendar {...props} dx={xdata} d={xtoday} u={profile}/> : null}
-                            {menu === 2 ? <List {...props} d={xdata} u={profile}/> : null}
-                            {menu === 3 ? <Notifications {...props} u={profile}/> : null}
-                            {menu === 4 ? <Profile {...props} u={profile}/> : null}
-                        </View>
+                        <ScrollView>
+                            <View style={{flex: 1}}>
+                                {menu === 1 ? <Calendar {...props} dx={xdata} d={xtoday} u={profile}/> : null}
+                                {menu === 2 ? <List {...props} d={xdata} u={profile}/> : null}
+                                {menu === 3 ? <Notifications {...props} u={profile}/> : null}
+                                {menu === 4 ? <Profile {...props} u={profile}/> : null}
+                            </View>
+                        </ScrollView>
                         <Divider style={{backgroundColor: '#f0f0f0'}}/>
                         <View style={{
                             padding: 10,
                             flexDirection: 'row',
                             alignItems: 'center',
-                            justifyContent: 'space-between'
+                            justifyContent: 'space-between',
+                            backgroundColor: '#fff'
                         }}>
                             <Button color={'#fff'}
                                     iconColor={(menu === 1 ? 'red' : themeColor().lightTheme.PLACEHOLDER)} iconSize={20}
