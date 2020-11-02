@@ -153,8 +153,7 @@ class Calendar extends React.Component {
                         padding: 10,
                         paddingHorizontal: 20
                     }}>
-                        <Text bold h6 color="white">SEEDS</Text>
-                        <Text italic bold h6 color="white">OF</Text>
+                        <Text bold h6 color="white">SEEDS OF</Text>
                         <Text bold h6 color="white">DESTINY</Text>
                         <Text bold h3 color="white">TODAY</Text>
                     </View>
