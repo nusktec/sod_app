@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 import React, {useState} from "react";
-import {ImageBackground, SafeAreaView, StatusBar, View, Modal, TouchableOpacity, Linking, Image} from "react-native";
+import {ImageBackground, ScrollView, StatusBar, View, Modal, TouchableOpacity, Linking, Image} from "react-native";
 import {Button, Icon, Input, Text} from "galio-framework";
 import Toast from "react-native-toast-message";
 import {imagesStore, themeColor} from "./Themes";
@@ -73,12 +73,11 @@ const WelcomeScreen: () => React$Node = (props) => {
     return (
         <>
         <StatusBar barStyle={xtbar} backgroundColor={'transparent'} translucent/>
-        <SafeAreaView style={{flex: 1, backgroundColor: themeColor().lightTheme.bgWhite}}>
-            <ImageBackground source={imagesStore().bg11}
-                             style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                <Text bold h2 style={{color: themeColor().lightTheme.bgWhite, textAlign: 'center'}}>SEEDS OF DESTINY</Text>
-                <Text h6 bold style={{color: themeColor().lightTheme.bgWhite}}>Newly Installed ?</Text>
-            </ImageBackground>
+        <ImageBackground source={imagesStore().bg11} style={{alignItems: 'center', justifyContent: 'center', height: 350, width: '100%', resizeMode: 'cover'}}>
+            <Text bold h2 style={{color: themeColor().lightTheme.bgWhite, textAlign: 'center'}}>SEEDS OF DESTINY</Text>
+            <Text h6 bold style={{color: themeColor().lightTheme.bgWhite}}>Newly Installed ?</Text>
+        </ImageBackground>
+        <ScrollView style={{marginTop: -40,}}>
             <View style={{
                 flex: 1,
                 backgroundColor: themeColor().lightTheme.bg,
@@ -87,7 +86,6 @@ const WelcomeScreen: () => React$Node = (props) => {
                 justifyContent: 'center',
                 padding: 20,
                 elevation: 1,
-                marginTop: -50,
                 marginHorizontal: 10,
                 marginBottom: 20,
             }}>
@@ -131,52 +129,52 @@ const WelcomeScreen: () => React$Node = (props) => {
                             }}>YouTube</Button>
                 </View>
             </View>
-            <Modal onDismiss={() => {
-                setTBar('light-content')
-            }} onShow={() => {
-                setTBar('dark-content')
-            }} statusBarTranslucent
-                   animationType="fade" visible={xmodal}>
-                <TouchableOpacity onPress={() => {
-                    setModal(false);
-                }} style={{
+        </ScrollView>
+        <Modal onDismiss={() => {
+            setTBar('light-content')
+        }} onShow={() => {
+            setTBar('dark-content')
+        }} statusBarTranslucent
+               animationType="fade" visible={xmodal}>
+            <TouchableOpacity onPress={() => {
+                setModal(false);
+            }} style={{
+                position: 'absolute',
+                top: 30,
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: 10,
+                margin: 10
+            }}>
+                <Icon color={'#000'} family={'feather'} name={'x'} size={20} raised={true}/>
+            </TouchableOpacity>
+            <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
+                <Text h3 bold muted style={{marginVertical: 20}}>Select Gender</Text>
+                <Image style={{width: 200, height: 200, resizeMode: 'contain'}} source={imagesStore().gender}/>
+                <Button style={{marginTop: 50}} round iconFamily={'feather'}
+                        icon={(xgender === 'M' ? 'check' : 'x')}
+                        size={'small'} color="success"
+                        onPress={() => {
+                            //open youtube
+                            setXGenger('M');
+                        }}>MALE</Button>
+                <Button round iconFamily={'feather'} icon={(xgender === 'F' ? 'check' : 'x')} size={'small'}
+                        color="danger"
+                        onPress={() => {
+                            //open youtube
+                            setXGenger('F');
+                        }}>FEMALE</Button>
+                <Button onPress={() => {
+                    //start reg...
+                    submitReg();
+                }} size={'large'} style={{
                     position: 'absolute',
-                    top: 30,
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    padding: 10,
-                    margin: 10
-                }}>
-                    <Icon color={'#000'} family={'feather'} name={'x'} size={20} raised={true}/>
-                </TouchableOpacity>
-                <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
-                    <Text h3 bold muted style={{marginVertical: 20}}>Select Gender</Text>
-                    <Image style={{width: 200, height: 200, resizeMode: 'contain'}} source={imagesStore().gender}/>
-                    <Button style={{marginTop: 50}} round iconFamily={'feather'}
-                            icon={(xgender === 'M' ? 'check' : 'x')}
-                            size={'small'} color="success"
-                            onPress={() => {
-                                //open youtube
-                                setXGenger('M');
-                            }}>MALE</Button>
-                    <Button round iconFamily={'feather'} icon={(xgender === 'F' ? 'check' : 'x')} size={'small'}
-                            color="danger"
-                            onPress={() => {
-                                //open youtube
-                                setXGenger('F');
-                            }}>FEMALE</Button>
-                    <Button onPress={() => {
-                        //start reg...
-                        submitReg();
-                    }} size={'large'} style={{
-                        position: 'absolute',
-                        bottom: 30,
-                        padding: 10
-                    }}><Text color="white" h4 bold>Continue</Text></Button>
-                </View>
-            </Modal>
-        </SafeAreaView>
+                    bottom: 30,
+                    padding: 10
+                }}><Text color="white" h6 bold>Continue</Text></Button>
+            </View>
+        </Modal>
         </>
     );
 };

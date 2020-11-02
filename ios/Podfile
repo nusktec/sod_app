@@ -10,14 +10,6 @@ target 'sod_app' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
-  pod 'RNSvgImage', :path => '../node_modules/react-native-svg-img'
-
-  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
-
-  pod 'TextToSpeech', :path => '../node_modules/react-native-tts'
-
-  pod 'react-native-onesignal', :path => '../node_modules/react-native-onesignal'
-
   target 'sod_appTests' do
     inherit! :complete
     # Pods for testing

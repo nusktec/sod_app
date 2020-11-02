@@ -150,13 +150,14 @@ const Profile: () => React$Node = (props) => {
             }} style={{
                 position: 'absolute',
                 top: 30,
+                zIndex: 99999,
                 flexDirection: 'row',
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 padding: 10,
                 margin: 10
             }}>
-                <Icon color={'#000'} type={'feather'} name={'x'} size={20} raised={true}/>
+                <Icon color={'#000'} type={'feather'} name={'arrow-left'} size={30} raised={true}/>
             </TouchableOpacity>
             <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
                 <Image style={{width: 200, height: 200, resizeMode: 'contain'}} source={imagesStore().developer}/>

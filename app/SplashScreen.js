@@ -30,14 +30,12 @@ const SplashScreen: () => React$Node = (props) => {
     return (
         <>
         <StatusBar barStyle="light-content" backgroundColor={'transparent'} translucent/>
-        <SafeAreaView style={{flex: 1, backgroundColor: themeColor().lightTheme.bgWhite}}>
             <ImageBackground source={bgShuffler()} style={{flex: 1, alignItems: 'center', justifyContent: 'center', resizeMode: 'contain'}}>
                 <Image style={{width: 100, height: 100, marginVertical: 50}} source={imagesStore().logo}/>
                 <Text bold h3 style={{color: themeColor().lightTheme.bgWhite}}>SEEDS OF DESTINY</Text>
                 <Text bold p style={{fontSize: 13, color: '#fff'}}>Mobile x3</Text>
-                <Text bold p style={{color: '#fff', fontSize: 12, position: 'absolute', bottom: 5}}>RSC BYTE LTD</Text>
+                <Text bold p style={{color: '#fff', fontSize: 12, position: 'absolute', bottom: 20}}>RSC BYTE LTD</Text>
             </ImageBackground>
-        </SafeAreaView>
         </>
     );
 };

@@ -135,13 +135,13 @@ class List extends React.Component {
                 <Image source={{uri: ASSETS_URL + "/" + d.cimage}}
                        style={{width: 80, height: '100%', resizeMode: 'cover'}}/>
                 <View style={{padding: 8, alignItems: 'center'}}>
-                    <Text h4 bold>{this.getDate(d.cuptime, 1)}</Text>
+                    <Text h5 bold>{this.getDate(d.cuptime, 1)}</Text>
                     <Text italic bold>{this.getDate(d.cuptime, 2) + ' ' + this.getDate(d.cuptime, 3).substr(2)}</Text>
                 </View>
                 <View style={{flex: 1, padding: 3}}>
-                    <Text numberOfLines={1} h6 bold>{d.ctopic}</Text>
+                    <Text numberOfLines={1} bold>{d.ctopic}</Text>
                     <Text numberOfLines={2} elipsizeMode={'tail'} italic>{d.cscripture}</Text>
-                    <Text italic bold>{d.cuptime}</Text>
+                    <Text italic bold>{d.cuptime.split(' ')[0]}</Text>
                 </View>
             </TouchableOpacity>
             </>
@@ -183,13 +183,14 @@ class List extends React.Component {
                         alignItems: 'center',
                         justifyContent: 'space-between',
                         padding: 10,
-                        margin: 10
+                        margin: 10,
+                        zIndex: 99999
                     }}>
-                        <Icon color={'#000'} type={'feather'} name={'x'} size={20}
+                        <Icon color={'#000'} type={'feather'} name={'arrow-left'} size={30}
                               raised={true}/>
                     </TouchableOpacity>
                     <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
-                        <Text h4 bold style={{textAlign: 'center'}}>{this.state.focusTopic}</Text>
+                        <Text h6 bold style={{textAlign: 'center'}}>{this.state.focusTopic}</Text>
                         <Text style={{padding: 10}}>See Attached Image. Click to download banner</Text>
                         <Tile
                             onPress={()=>{

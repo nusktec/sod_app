@@ -23,7 +23,7 @@ class Calendar extends React.Component {
                 <ImageBackground source={bgCardShuffle()} style={{width: 120, height: 150, borderRadius: 15, overflow: 'hidden', elevation: 2, margin: 5, borderWidth: 2, borderColor: '#fff'}}>
                     <View style={{flex: 1, backgroundColor: 'rgba(0,0,0,0.5)', padding: 10, alignItems: 'center', justifyContent: 'center'}}>
                         <View style={{padding: 3, alignItems: 'center'}}>
-                            <Text color="white" h2 bold>{this.getDate(d.cuptime, 1)}</Text>
+                            <Text color="white" h4 bold>{this.getDate(d.cuptime, 1)}</Text>
                             <Text color="white" italic bold>{this.getDate(d.cuptime, 2)+' '+this.getDate(d.cuptime, 3).substr(2)}</Text>
                         </View>
                         <Text numberOfLines={2} style={{textAlign: 'center'}} color="white" bold>{d.ctopic}</Text>
@@ -49,8 +49,8 @@ class Calendar extends React.Component {
                 <ImageBackground source={bgCardShuffle()} style={{width: 80, height: 80, borderRadius: 15, overflow: 'hidden', elevation: 2, margin: 5, borderWidth: 2, borderColor: '#fff'}}>
                     <View style={{flex: 1, backgroundColor: 'rgba(0,0,0,0.5)', padding: 10, alignItems: 'center', justifyContent: 'center'}}>
                         <View style={{padding: 3, alignItems: 'center'}}>
-                            <Text color="white" h2 bold>{this.getDate(d.cuptime, 1)}</Text>
-                            <Text color="white" italic bold>{this.getDate(d.cuptime, 2)+' '+this.getDate(d.cuptime, 3).substr(2)}</Text>
+                            <Text color="white" h5 bold>{this.getDate(d.cuptime, 1)}</Text>
+                            <Text style={{fontSize: 12}} color="white" italic bold>{this.getDate(d.cuptime, 2)+' '+this.getDate(d.cuptime, 3).substr(2)}</Text>
                         </View>
                     </View>
                 </ImageBackground>
@@ -118,7 +118,7 @@ class Calendar extends React.Component {
             <>
             <View style={{flex: 1, flexDirection: 'column'}}>
                 <View style={{padding: 15}}>
-                    <Text h2 bold>Welcome Back</Text>
+                    <Text h3 bold>Welcome Back</Text>
                     <Text bold>{this.props.u.mname}</Text>
                 </View>
                 <ImageBackground source={bgCardShuffle()} style={{
@@ -153,10 +153,10 @@ class Calendar extends React.Component {
                         padding: 10,
                         paddingHorizontal: 20
                     }}>
-                        <Text bold h3 color="white">SEEDS</Text>
-                        <Text italic bold h5 color="white">OF</Text>
-                        <Text bold h5 color="white">DESTINY</Text>
-                        <Text bold h1 color="white">TODAY</Text>
+                        <Text bold h6 color="white">SEEDS</Text>
+                        <Text italic bold h6 color="white">OF</Text>
+                        <Text bold h6 color="white">DESTINY</Text>
+                        <Text bold h3 color="white">TODAY</Text>
                     </View>
                     <View style={{
                         width: '50%',
@@ -166,8 +166,8 @@ class Calendar extends React.Component {
                         backgroundColor: 'rgba(0,0,0,0.2)',
                         paddingHorizontal: 10
                     }}>
-                        <Text bold h6 color="yellow">{this.props.d.cuptime.split(' ')[0]}</Text>
-                        <Text h6 bold color="white"
+                        <Text bold color="yellow">{this.props.d.cuptime.split(' ')[0]}</Text>
+                        <Text bold color="white"
                               style={{marginTop: 20, textAlign: 'center'}}>{this.props.d.ctopic}</Text>
                         <Text ellipsizeMode="tail" numberOfLines={3} italic color="white"
                               style={{marginBottom: 20, textAlign: 'center'}}>{this.props.d.cscripture}</Text>
@@ -175,7 +175,7 @@ class Calendar extends React.Component {
                             disabled={this.props.d.cstatus === 0}
                             type={'outline'}
                             buttonStyle={{borderColor: 'white', height: 30}}
-                            titleStyle={{color: 'white'}}
+                            titleStyle={{color: 'white', fontSize: 12}}
                             icon={
                                 <Icon
                                     name="arrow-right"
@@ -192,7 +192,7 @@ class Calendar extends React.Component {
                     </View>
                 </ImageBackground>
                 <View style={{padding: 15}}>
-                    <Text muted h4 bold>Previous Seeds</Text>
+                    <Text muted h6 bold>Previous Seeds</Text>
                     <Text muted bold>{'Browser old seeds of destiny...'}</Text>
                 </View>
                 <View style={{margin: 1}}>
@@ -201,7 +201,7 @@ class Calendar extends React.Component {
                               renderItem={({item, index}) =>this.listSODx(item, index)} />
                 </View>
                 <View style={{padding: 15}}>
-                    <Text muted h4 bold>Future Seeds</Text>
+                    <Text muted h6 bold>Future Seeds</Text>
                     <Text muted bold>{'Browser new seeds of destiny...'}</Text>
                 </View>
                 <View style={{margin: 1}}>

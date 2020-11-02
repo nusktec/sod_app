@@ -46,6 +46,9 @@ class BookReader extends React.Component {
         //         this.btnSheet.togglePanel();
         // }, 10000);
         _mounted = true;
+        Tts.addEventListener('tts-start', (event) => {});
+        Tts.addEventListener('tts-finish', (event) => {});
+        Tts.addEventListener('tts-cancel', (event) => {});
     }
 
     componentWillUnmount() {
@@ -198,13 +201,14 @@ class BookReader extends React.Component {
                                 justifyContent: 'space-between',
                                 padding: 5,
                                 marginHorizontal: 20,
-                                marginVertical: 40
+                                marginVertical: 40,
+                                zIndex: 99999,
                             }}>
                                 <Icon color={'white'} family={'feather'} name={'arrow-left'} size={25} raised={true}/>
                             </TouchableOpacity>
                             <View style={{alignSelf: 'center', padding: 10}}>
-                                <Text numberOfLines={1} bold h3 color={'#fff'}>{this.state.ctopic}</Text>
-                                <Text bold color={'#fff'}>{this.state.cuptime}</Text>
+                                <Text numberOfLines={1} bold h6 color={'#fff'}>{this.state.ctopic}</Text>
+                                <Text bold color={'#fff'}>{this.state.cuptime.split(' ')[0]}</Text>
                                 <View
                                     style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start'}}>
                                     <Badge value={this.state.cviews + ' Views'} status="error"
@@ -226,7 +230,7 @@ class BookReader extends React.Component {
                                         containerStyle={{marginVertical: 30}}
                                         type={'outline'}
                                         buttonStyle={{borderColor: 'white', height: 30, width: 100}}
-                                        titleStyle={{color: 'white'}}
+                                        titleStyle={{color: 'white', fontSize: 12}}
                                         title=" YouTube"
                                         onPress={() => {
                                             //open youtube
@@ -245,7 +249,7 @@ class BookReader extends React.Component {
                                         containerStyle={{marginVertical: 30, marginHorizontal: 10}}
                                         type={'outline'}
                                         buttonStyle={{borderColor: 'white', height: 30, width: 100}}
-                                        titleStyle={{color: 'white'}}
+                                        titleStyle={{color: 'white', fontSize: 12}}
                                         title=" Listen"
                                         onPress={() => {
                                             //open youtube
@@ -277,7 +281,8 @@ class BookReader extends React.Component {
                 alignItems: 'center',
                 justifyContent: 'space-around',
                 backgroundColor: '#fff',
-                elevation: 5
+                elevation: 5,
+                marginBottom: 15
             }}>
                 <Buttonx onPress={() => {
                     //share or invite user to download app
@@ -318,7 +323,7 @@ class BookReader extends React.Component {
                           data={this.state.cdata.comm} keyExtractor={ext => {
                     return ext.id
                 }} renderItem={({item, index}) => this.ItemList(item, index)}/>
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <View style={{flexDirection: 'row', alignItems: 'center', marginBottom: 15}}>
                     <Input style={{width: Dimensions.get('window').width - 100, backgroundColor: '#eeeeee'}}
                            multiline={true} onChangeText={(v) => {
                         this.setState({xcomm: v})
